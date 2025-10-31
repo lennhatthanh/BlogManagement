@@ -1,8 +1,8 @@
 import React from "react";
-import logo from "@/assets/images/logo.png"
+import logo from "@/assets/images/logo.png";
 export default function Footer() {
     return (
-        <div class="px-6 md:px-16 lg:px-24 xl:px-32 bg-[#5044e5]/5 py-10 md:py-16 flex flex-col md:flex-row items-center justify-between">
+        <div class="px-6 md:px-16 lg:px-24 xl:px-32 bg-primary/5 py-10 md:py-16 flex flex-col md:flex-row items-center justify-between">
             <div>
                 <img class="max-w-12" alt="Logo" src={logo} />
                 <div class="max-w-[410px] mt-6 text-card-foreground text-sm leading-relaxed">

@@ -13,14 +13,14 @@ export default function Header() {
         localStorage.setItem("theme", theme);
     }, [theme]);
     return (
-        <div className="container mx-auto py-4 fixed top-0 bg-background z-100 right-0 left-0">
+        <div className="container mx-auto py-4 fixed top-0 bg-background z-40 right-0 left-0">
             <div className="flex items-center justify-between md:px-16 lg:px-24 xl:px-32">
                 <Link to="/">
                     <img src={logo} alt="" className="max-w-12" />
                 </Link>
                 <div className="flex gap-2">
                     <Link>
-                        <Button className="bg-[#5044e5] w-full hover:bg-[#5044e5]/85 text-white"> + Create Blog</Button>
+                        <Button className="bg-primary w-full hover:bg-primary/85 text-white"> + Create Blog</Button>
                     </Link>
                     {theme === "light" ? (
                         <Button onClick={handleTheme} className="bg-accent text-black">

@@ -19,7 +19,7 @@ export default function Home() {
         <div>
             <div className="text-center mt-10 mb-8">
                 <h1 className="hero-title text-3xl sm:text-6xl font-semibold sm:leading-[4rem] text-gray-700">
-                    Your own <span className="text-[#5044e5]">blogging</span> <br /> platform
+                    Your own <span className="text-primary">blogging</span> <br /> platform
                 </h1>
                 <p className="my-6 sm:my-8 max-w-2xl mx-auto max-sm:text-xs text-gray-500">
                     This is your space to think out loud, to share what matters, and to write without filters. Whether
@@ -31,7 +31,7 @@ export default function Home() {
                         class="w-full pl-4 h-9 bg-transparent outline-none border-none shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-muted-foreground text-base md:text-sm"
                         value=""
                     />
-                    <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium h-9 bg-[#5044e5] hover:bg-[#5044e5]/85 text-white px-8 py-2 m-1.5 rounded transition-all cursor-pointer focus-visible:ring-[3px] focus-visible:ring-ring/50">
+                    <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium h-9 bg-primary hover:bg-primary/85 text-white px-8 py-2 m-1.5 rounded transition-all cursor-pointer focus-visible:ring-[3px] focus-visible:ring-ring/50">
                         Search
                     </button>
                 </div>

@@ -1,6 +1,5 @@
 import React from "react";
 import AnimatedWave from "@/components/lightswind/animated-wave";
-import "@/components/lightswind.css";
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -46,11 +45,14 @@ export default function Login() {
                     </form>
                 </CardContent>
                 <CardFooter className="flex-col gap-2">
-                    <Button type="submit" className="bg-[#5044e5] w-full hover:bg-[#5044e5]/85">
+                    <Button type="submit" className="bg-primary w-full hover:bg-primary/85">
                         Login
                     </Button>
                     <Label className="text-sm text-gray-500 mt-4 font-normal">
-                        Dont have an account? <Link to="/signup" className="text-[#5044e5]">Signup</Link>
+                        Dont have an account?{" "}
+                        <Link to="/signup" className="text-primary">
+                            Signup
+                        </Link>
                     </Label>
                 </CardFooter>
             </Card>
