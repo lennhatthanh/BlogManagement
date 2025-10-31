@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import he from "he";
 
 export default function BlogList({ blogs }) {
     const navigate = useNavigate();
@@ -30,9 +31,8 @@ export default function BlogList({ blogs }) {
                                 <h5 className="text-lg font-semibold mb-2 text-ellipsis whitespace-nowrap overflow-hidden">
                                     {item.title}
                                 </h5>
-                                <p className="text-foreground mb-2 text-xs">
-                                    I've been a Cursor power user for over a year. I wrote the guide to Cursor tips that
-                                    thousands of d...
+                                <p className="text-foreground mb-2 text-xs  line-clamp-3">
+                                    {he.decode(item.content).replace(/<[^>]*>/g, "")}
                                 </p>
                             </div>
                         </div>
