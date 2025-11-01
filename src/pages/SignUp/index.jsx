@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AnimatedWave from "@/components/lightswind/animated-wave";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,20 +13,43 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import logo from "@/assets/images/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { signup } from "@/services/api/user";
+import toast from "react-hot-toast";
 export default function SignUp() {
+    const navigate = useNavigate()
+    const [info, setInfo] = useState({
+        email: "",
+        username: "",
+        password: "",
+    });
+    const [loading, setLoading] = useState(false);
+    const handleSigUp = async () => {
+        try {
+            setLoading(true);
+            await signup(info);
+            toast.success("Register compelete!");
+            navigate("/")
+        } catch (error) {
+            toast.error(error.response.data.messags);
+        } finally {
+            setLoading(false);
+        }
+    };
     return (
         <div className="relative h-screen w-screen flex items-center justify-center">
             <AnimatedWave className="absolute" />
-            <Card className="w-full max-w-sm z-10">
+            <Card className="w-full max-w-sm z-10" >
                 <CardHeader>
                     <img src={logo} className="mx-auto w-15 h-15" alt="" />
                 </CardHeader>
                 <CardContent>
-                    <form>
+                    <div>
                         <div className="flex flex-col gap-6">
                             <div className="grid gap-4">
                                 <Input
+                                    value={info.email}
+                                    onChange={(e) => setInfo({ ...info, email: e.target.value })}
                                     id="email"
                                     className="placeholder:text-gray-400"
                                     type="email"
@@ -34,13 +57,17 @@ export default function SignUp() {
                                     required
                                 />
                                 <Input
-                                    id="email"
+                                    value={info.username}
+                                    onChange={(e) => setInfo({ ...info, username: e.target.value })}
+                                    id="username"
                                     className="placeholder:text-gray-400"
                                     type="text"
                                     placeholder="Enter your username"
                                     required
                                 />
                                 <Input
+                                    value={info.password}
+                                    onChange={(e) => setInfo({ ...info, password: e.target.value })}
                                     id="password"
                                     className="placeholder:text-gray-400"
                                     type="password"
@@ -49,10 +76,10 @@ export default function SignUp() {
                                 />
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </CardContent>
                 <CardFooter className="flex-col gap-2">
-                    <Button type="submit" className="bg-primary w-full hover:bg-primary/85">
+                    <Button onClick={handleSigUp} className="bg-primary w-full hover:bg-primary/85">
                         Login
                     </Button>
                     <Label className="text-sm text-gray-500 mt-4 font-normal">

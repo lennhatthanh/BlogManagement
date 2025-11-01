@@ -10,18 +10,23 @@ const api = axios.create({
 
 api.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem("token"); // Lấy token
+        const parseUserInfo = JSON.parse(localStorage.getItem("userInfo"));
+        const token = parseUserInfo?.accessToken;
         if (token) {
-            config.headers["Authorization"] = `Bearer ${token}`; // Thêm Bearer token
+            config.headers.Authorization = `Bearer ${token}`;
         }
         return config;
     },
-    (error) => Promise.reject(error) // Truyền lỗi
+    (error) => {
+        return Promise.reject(error);
+    }
 );
-
 api.interceptors.response.use(
     (response) => response, // Truyền qua phản hồi thành công
     (error) => {
+        if (window.location.href.includes("/login")) {
+            return Promise.reject(error);
+        }
         if (error.response?.status === 401) {
             // Kiểm tra 401
             localStorage.removeItem("token"); // Xóa token không hợp lệ

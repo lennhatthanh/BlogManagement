@@ -1,17 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import logo from "@/assets/images/logo.png";
 import { Button } from "../ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { DropdownMenuClient } from "../DropdownMenuClient";
+import AuthContext from "@/context/AuthContext";
+import { DropdownMenuUser } from "../DropdownMenuUser";
+import { DropdownMenuAdmin } from "../DropdownMenuAdmin";
 export default function Header() {
     const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+    const { role, logoutAccount } = useContext(AuthContext);
     const handleTheme = () => {
         theme === "dark" ? setTheme("light") : setTheme("dark");
     };
+    console.log(role);
+    
     useEffect(() => {
         theme === "dark" ? document.body.classList.add("dark") : document.body.classList.remove("dark");
         localStorage.setItem("theme", theme);
     }, [theme]);
+
+    const handleLogout = () => {
+        logoutAccount();
+    }
     return (
         <div className="container mx-auto py-4 fixed top-0 bg-background z-40 right-0 left-0">
             <div className="flex items-center justify-between md:px-16 lg:px-24 xl:px-32">
@@ -66,7 +76,7 @@ export default function Header() {
                             </svg>
                         </Button>
                     )}
-                    <DropdownMenuClient />
+                    {role ? (role == "user" ? <DropdownMenuUser handleLogout={handleLogout}/> : <DropdownMenuAdmin handleLogout={handleLogout}/>) : <DropdownMenuClient />}
                 </div>
             </div>
         </div>

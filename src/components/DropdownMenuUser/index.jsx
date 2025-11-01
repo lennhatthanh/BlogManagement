@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Link } from "react-router-dom";
 
-export function DropdownMenuClient() {
+export function DropdownMenuUser({ handleLogout }) {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -42,19 +42,20 @@ export function DropdownMenuClient() {
                             stroke-width="2"
                             stroke-linecap="round"
                             stroke-linejoin="round"
-                            class="tabler-icon tabler-icon-fingerprint w-4 h-4 text-[#6b7280] group-hover:text-white"
+                            class="tabler-icon tabler-icon-clipboard-list w-4 h-4 text-[#6b7280] group-hover:text-white"
                         >
-                            <path d="M18.9 7a8 8 0 0 1 1.1 5v1a6 6 0 0 0 .8 3"></path>
-                            <path d="M8 11a4 4 0 0 1 8 0v1a10 10 0 0 0 2 6"></path>
-                            <path d="M12 11v2a14 14 0 0 0 2.5 8"></path>
-                            <path d="M8 15a18 18 0 0 0 1.8 6"></path>
-                            <path d="M4.9 19a22 22 0 0 1 -.9 -7v-1a8 8 0 0 1 12 -6.95"></path>
+                            <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"></path>
+                            <path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path>
+                            <path d="M9 12l.01 0"></path>
+                            <path d="M13 12l2 0"></path>
+                            <path d="M9 16l.01 0"></path>
+                            <path d="M13 16l2 0"></path>
                         </svg>
-                        Login
+                        My Posts
                     </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                    <Link to="/signup" className="flex gap-2">
+                    <Link to="/login" onClick={handleLogout} className="flex gap-2">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"
@@ -65,14 +66,13 @@ export function DropdownMenuClient() {
                             stroke-width="2"
                             stroke-linecap="round"
                             stroke-linejoin="round"
-                            class="tabler-icon tabler-icon-user-plus w-4 h-4 text-[#6b7280] group-hover:text-white"
+                            class="tabler-icon tabler-icon-logout w-4 h-4 text-[#6b7280] group-hover:text-white"
                         >
-                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
-                            <path d="M16 19h6"></path>
-                            <path d="M19 16v6"></path>
-                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4"></path>
+                            <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"></path>
+                            <path d="M9 12h12l-3 -3"></path>
+                            <path d="M18 15l3 -3"></path>
                         </svg>
-                        SignUp
+                        Logout
                     </Link>
                 </DropdownMenuItem>
             </DropdownMenuContent>
