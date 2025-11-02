@@ -6,6 +6,8 @@ import Home from "./pages/Home";
 import BlogDetail from "./pages/BlogDetail";
 import { Toaster } from "react-hot-toast";
 import { AuthContextProvider } from "./context/AuthContext";
+import UserManagement from "./pages/UserManagement";
+import ProtectedRoute from "./components/ProtectedRoute";
 function App() {
     return (
         <BrowserRouter>
@@ -17,6 +19,14 @@ function App() {
                     </Route>
                     <Route path="/" element={<Layout />}>
                         <Route index path="" element={<Home />} />
+                        <Route
+                            path="user-management"
+                            element={
+                                <ProtectedRoute role="admin">
+                                    <UserManagement />
+                                </ProtectedRoute>
+                            }
+                        />
                         <Route path="blog-detail/:id" element={<BlogDetail />} />
                     </Route>
                 </Routes>

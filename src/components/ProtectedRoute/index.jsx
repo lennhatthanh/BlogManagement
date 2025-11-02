@@ -3,11 +3,11 @@ import React, { useContext } from "react";
 import { Navigate } from "react-router-dom";
 
 export default function ProtectedRoute({children, role: requireRole}) {
-    const { userInfo } = useContext(AuthContext);
+    const { userInfo, role } = useContext(AuthContext);
     if(!userInfo){
         return <Navigate to="/login"/>
     } 
-    if(userInfo.user.role !== requireRole){
+    if(role !== requireRole){
         return <Navigate to="/"/> 
     }
   return children;

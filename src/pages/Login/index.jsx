@@ -17,6 +17,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { login } from "@/services/api/user";
 import toast from "react-hot-toast";
 import AuthContext from "@/context/AuthContext";
+import { Spinner } from "@/components/ui/spinner";
 export default function Login() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
@@ -27,8 +28,6 @@ export default function Login() {
         try {
             setLoading(true);
             await loginUser({ email, password });
-            toast.success("Login compelete!");
-            navigate("/");
         } catch (error) {
             toast.error(error.response.data.message);
         } finally {
@@ -69,9 +68,16 @@ export default function Login() {
                     </div>
                 </CardContent>
                 <CardFooter className="flex-col gap-2">
-                    <Button onClick={handleLogin} className="bg-primary w-full hover:bg-primary/85">
-                        Login
-                    </Button>
+                    {loading ? (
+                        <Button onClick={handleLogin} className="bg-primary w-full hover:bg-primary/85" disabled>
+                            <Spinner />
+                            Login
+                        </Button>
+                    ) : (
+                        <Button onClick={handleLogin} className="bg-primary w-full hover:bg-primary/85">
+                            Login
+                        </Button>
+                    )}
                     <Label className="text-sm text-gray-500 mt-4 font-normal">
                         Dont have an account?{" "}
                         <Link to="/signup" className="text-primary">

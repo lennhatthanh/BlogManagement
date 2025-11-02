@@ -8,11 +8,11 @@ import { DropdownMenuUser } from "../DropdownMenuUser";
 import { DropdownMenuAdmin } from "../DropdownMenuAdmin";
 export default function Header() {
     const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-    const { role, logoutAccount } = useContext(AuthContext);
+    const { role, logoutAccount, userInfo } = useContext(AuthContext);
     const handleTheme = () => {
         theme === "dark" ? setTheme("light") : setTheme("dark");
     };
-    console.log(role);
+    console.log(userInfo);
     
     useEffect(() => {
         theme === "dark" ? document.body.classList.add("dark") : document.body.classList.remove("dark");

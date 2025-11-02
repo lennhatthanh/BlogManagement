@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import AnimatedWave from "@/components/lightswind/animated-wave";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,20 +16,21 @@ import logo from "@/assets/images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { signup } from "@/services/api/user";
 import toast from "react-hot-toast";
+import { Spinner } from "@/components/ui/spinner";
+import AuthContext from "@/context/AuthContext";
 export default function SignUp() {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [info, setInfo] = useState({
         email: "",
         username: "",
         password: "",
     });
     const [loading, setLoading] = useState(false);
+    const {signUpUser} = useContext(AuthContext)
     const handleSigUp = async () => {
         try {
             setLoading(true);
-            await signup(info);
-            toast.success("Register compelete!");
-            navigate("/")
+            await signUpUser(info);
         } catch (error) {
             toast.error(error.response.data.messags);
         } finally {
@@ -39,7 +40,7 @@ export default function SignUp() {
     return (
         <div className="relative h-screen w-screen flex items-center justify-center">
             <AnimatedWave className="absolute" />
-            <Card className="w-full max-w-sm z-10" >
+            <Card className="w-full max-w-sm z-10">
                 <CardHeader>
                     <img src={logo} className="mx-auto w-15 h-15" alt="" />
                 </CardHeader>
@@ -79,9 +80,16 @@ export default function SignUp() {
                     </div>
                 </CardContent>
                 <CardFooter className="flex-col gap-2">
-                    <Button onClick={handleSigUp} className="bg-primary w-full hover:bg-primary/85">
-                        Login
-                    </Button>
+                    {loading ? (
+                        <Button onClick={handleSigUp} className="bg-primary w-full hover:bg-primary/85" disabled>
+                            <Spinner />
+                            Sign Up
+                        </Button>
+                    ) : (
+                        <Button onClick={handleSigUp} className="bg-primary w-full hover:bg-primary/85">
+                            Sign Up
+                        </Button>
+                    )}
                     <Label className="text-sm text-gray-500 mt-4 font-normal">
                         Already have an account?{" "}
                         <Link to="/login" className="text-primary">
