@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 export default function Home() {
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [search, setSearch] = useState("");
     useEffect(() => {
         getDataBlogs();
     }, []);
@@ -29,14 +30,19 @@ export default function Home() {
                     <input
                         placeholder="Enter search title..."
                         class="w-full pl-4 h-9 bg-transparent outline-none border-none shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-muted-foreground text-base md:text-sm"
-                        value=""
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
                     />
                     <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium h-9 bg-primary hover:bg-primary/85 text-white px-8 py-2 m-1.5 rounded transition-all cursor-pointer focus-visible:ring-[3px] focus-visible:ring-ring/50">
                         Search
                     </button>
                 </div>
             </div>
-            {loading ? <BlogListSkeleton /> : <BlogList blogs={blogs} />}
+            {loading ? (
+                <BlogListSkeleton />
+            ) : (
+                <BlogList blogs={blogs.filter((item) => item.title.toLowerCase().includes(search.toLowerCase()))} />
+            )}
         </div>
     );
 }
