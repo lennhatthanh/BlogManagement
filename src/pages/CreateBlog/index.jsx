@@ -96,7 +96,7 @@ export default function CreateBlog() {
                         <Input
                             onChange={(e) => setTitle(e.target.value)}
                             data-slot="input"
-                            id="title"
+                            id=""
                             placeholder="Enter blog title"
                             value={title}
                         />
