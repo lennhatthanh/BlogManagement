@@ -7,3 +7,7 @@ export const getBlogs = async () => {
 export const getBlog = async (id) => {
     return await api.get(`/posts/${id}`);
 };
+
+export const createBlog = async (payload) => {
+    return await api.post(`/posts`, payload);
+};

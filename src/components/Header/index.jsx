@@ -29,7 +29,7 @@ export default function Header() {
                     <img src={logo} alt="" className="max-w-12" />
                 </Link>
                 <div className="flex gap-2">
-                    <Link>
+                    <Link to="create-blog">
                         <Button className="bg-primary w-full hover:bg-primary/85 text-white"> + Create Blog</Button>
                     </Link>
                     {theme === "light" ? (

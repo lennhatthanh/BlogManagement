@@ -11,6 +11,7 @@ export const AuthContextProvider = ({ children }) => {
     const navigate = useNavigate();
     useEffect(() => {
         setRole(userInfo?.user?.role || null);
+        localStorage.setItem("userInfo", JSON.stringify(userInfo));
     }, [userInfo]);
     const logoutAccount = () => {
         setUserInfo(localStorage.removeItem("userInfo") || null);
@@ -24,9 +25,7 @@ export const AuthContextProvider = ({ children }) => {
                     const me = await getMe();
                     if (me.status === 200) {
                         setUserInfo({ ...res.data, ...me.data });
-                        setRole(res.data);
                         toast.success("Login compelete!");
-                        localStorage.setItem("userInfo", JSON.stringify({ ...res.data, ...me.data }));
                         navigate("/");
                     }
                 } catch (error) {
@@ -39,9 +38,10 @@ export const AuthContextProvider = ({ children }) => {
     };
     const signUpUser = async (payload) => {
         try {
-            await signup(payload);
-            toast.success("Register successful")
-            await loginUser({email: payload.email, password: payload.password});
+            const res = await signup(payload);
+            setUserInfo(res.data);
+            toast.success("Register successful");
+            navigate("/");
         } catch (error) {
             toast.error(error.response?.data?.message || "Sign Up failed");
         }

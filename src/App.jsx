@@ -8,6 +8,7 @@ import { Toaster } from "react-hot-toast";
 import { AuthContextProvider } from "./context/AuthContext";
 import UserManagement from "./pages/UserManagement";
 import ProtectedRoute from "./components/ProtectedRoute";
+import CreateBlog from "./pages/CreateBlog";
 function App() {
     return (
         <BrowserRouter>
@@ -28,6 +29,14 @@ function App() {
                             }
                         />
                         <Route path="blog-detail/:id" element={<BlogDetail />} />
+                        <Route
+                            path="create-blog"
+                            element={
+                                <ProtectedRoute role="user admin">
+                                    <CreateBlog />
+                                </ProtectedRoute>
+                            }
+                        />
                     </Route>
                 </Routes>
             </AuthContextProvider>
