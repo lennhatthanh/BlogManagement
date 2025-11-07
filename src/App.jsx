@@ -28,7 +28,7 @@ function App() {
                                 </ProtectedRoute>
                             }
                         />
-                        <Route path="blog-detail/:id" element={<BlogDetail />} />
+                        <Route path="blog-details/:id" element={<BlogDetail />} />
                         <Route
                             path="create-blog"
                             element={

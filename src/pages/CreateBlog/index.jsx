@@ -8,6 +8,7 @@ import { createBlog } from "@/services/api/blog";
 import { Editor } from "@tinymce/tinymce-react";
 import React, { useRef, useState } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateBlog() {
     const [tags, setTags] = useState([]);
@@ -16,16 +17,18 @@ export default function CreateBlog() {
     const [title, setTitle] = useState("");
     const editorRef = useRef(null);
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
     const handleAddTag = () => {
-        setTags([
-            {
-                id: Date.now(),
-                name: tagValue,
-            },
-            ...tags,
-        ]);
-        setTagValue("");
-        console.log(tags);
+        if (tagValue.length !== 0) {
+            setTags([
+                {
+                    id: Date.now(),
+                    name: tagValue,
+                },
+                ...tags,
+            ]);
+            setTagValue("");
+        }
     };
     const handleKeyDown = (e) => {
         if (e.key === "Enter") {
@@ -54,7 +57,15 @@ export default function CreateBlog() {
             }
         );
         const result = await res.json();
-        handleCreateBlog(result);
+        console.log("result", result);
+        console.log("res", res);
+        
+        if (res.ok) {
+            handleCreateBlog(result);
+        } else {
+            toast.success("Tải hình không thành công")
+            setLoading(false)
+        }
     };
     const handleCreateBlog = async (imageResult) => {
         try {
@@ -64,11 +75,16 @@ export default function CreateBlog() {
                 content: editorRef.current ? editorRef.current.getContent() : blog.content,
                 tags: tags.map((item) => item.name),
             });
+            if (!file || !editorRef.current.getContent() || !title) {
+                toast.success("Nhập thiếu thông tin");
+                return;
+            }
             toast.success("Tải bài thành công!");
             setTitle("");
             setTags([]);
             setFile(null);
             editorRef.current.setContent("");
+            navigate("/");
         } catch (error) {
             toast.error(error.response.data.message);
         }
@@ -76,19 +92,19 @@ export default function CreateBlog() {
     };
     return (
         <div>
-            <h2 class="hero-title text-3xl sm:text-6xl font-semibold sm:leading-[4rem] text-primary text-center mt-10 mb-8">
+            <h2 className="hero-title text-3xl sm:text-6xl font-semibold sm:leading-[4rem] text-primary text-center mt-10 mb-8">
                 📝 Create a New Blog
             </h2>
             <div className="grid gap-6">
-                <div class="space-y-4">
-                    <div class="grid gap-2  ">
-                        <legend class="font-medium">Blog Image</legend>
+                <div className="space-y-4">
+                    <div className="grid gap-2  ">
+                        <legend className="font-medium">Blog Image</legend>
                         <UploadImageBlog onUpload={onUpload} />
                     </div>
-                    <div class="grid gap-2">
+                    <div className="grid gap-2">
                         <Label
                             data-slot="label"
-                            class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"
+                            className="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"
                             for="title"
                         >
                             Blog Title
@@ -101,10 +117,10 @@ export default function CreateBlog() {
                             value={title}
                         />
                     </div>
-                    <div class="grid gap-2">
+                    <div className="grid gap-2">
                         <Label
                             data-slot="label"
-                            class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"
+                            className="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"
                             for="title"
                         >
                             Blog Content
@@ -171,9 +187,9 @@ export default function CreateBlog() {
                             initialValue="<p>This is the initial content of the editor.</p>"
                         />
                     </div>
-                    <div class="grid gap-2">
+                    <div className="grid gap-2">
                         <Label>Blog Tag</Label>
-                        <div class="flex gap-2">
+                        <div className="flex gap-2">
                             <Input
                                 onKeyDown={handleKeyDown}
                                 value={tagValue}
@@ -181,13 +197,13 @@ export default function CreateBlog() {
                                 placeholder="Enter blog tag"
                                 type="text"
                             />
-                            <Button onClick={handleAddTag} data-slot="button">
+                            <Button onClick={handleAddTag} data-slot="button" className="text-white">
                                 Add Tag
                             </Button>
                         </div>
-                        <div class="flex gap-2">
+                        <div className="flex gap-2">
                             {tags.map((item) => (
-                                <Badge onClick={() => handleRemoveTag(item)} className="cursor-pointer bg-blue-500">
+                                <Badge onClick={() => handleRemoveTag(item)} className="cursor-pointer bg-primary text-white">
                                     {item.name}
                                     <span>
                                         <svg
@@ -200,7 +216,7 @@ export default function CreateBlog() {
                                             stroke-width="2"
                                             stroke-linecap="round"
                                             stroke-linejoin="round"
-                                            class="tabler-icon tabler-icon-x cursor-pointer w-3 h-3"
+                                            className="tabler-icon tabler-icon-x cursor-pointer w-3 h-3"
                                         >
                                             <path d="M18 6l-12 12"></path>
                                             <path d="M6 6l12 12"></path>
@@ -212,11 +228,11 @@ export default function CreateBlog() {
                     </div>
                     <div className="flex w-full justify-center">
                         {loading ? (
-                            <Button onClick={handleUpload} className="mx-auto" disabled>
+                            <Button onClick={handleUpload} className="mx-auto text-white" disabled>
                                 <Spinner /> Create Blog
                             </Button>
                         ) : (
-                            <Button onClick={handleUpload} className="mx-auto">
+                            <Button onClick={handleUpload} className="mx-auto text-white">
                                 Create Blog
                             </Button>
                         )}

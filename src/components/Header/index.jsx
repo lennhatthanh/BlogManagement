@@ -24,7 +24,7 @@ export default function Header() {
     }
     return (
         <div className="container mx-auto py-4 fixed top-0 bg-background z-40 right-0 left-0">
-            <div className="flex items-center justify-between md:px-16 lg:px-24 xl:px-32">
+            <div className="flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32">
                 <Link to="/">
                     <img src={logo} alt="" className="max-w-12" />
                 </Link>

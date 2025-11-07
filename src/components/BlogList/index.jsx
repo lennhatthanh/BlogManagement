@@ -8,7 +8,7 @@ export default function BlogList({ blogs }) {
 
     const handleNavigate = (id) => {
         console.log(id);
-        navigate(`/blog-detail/${id}`);
+        navigate(`/blog-details/${id}`);
     };
 
     return (
