@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import he from "he";
 import LoadingBlogDetail from "../LoadingBlogDetail";
+import { cleanHTMT } from "@/until/cleanHtml";
 
 export default function BlogList({ blogs }) {
     const navigate = useNavigate();
@@ -39,7 +39,7 @@ export default function BlogList({ blogs }) {
                                             {item.title}
                                         </h5>
                                         <p className="text-foreground mb-2 text-xs line-clamp-3">
-                                            {he.decode(item.content).replace(/<[^>]*>/g, "")}
+                                            {cleanHTMT(item.content)}
                                         </p>
                                     </div>
                                 </div>

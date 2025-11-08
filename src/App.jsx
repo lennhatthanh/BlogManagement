@@ -9,6 +9,7 @@ import { AuthContextProvider } from "./context/AuthContext";
 import UserManagement from "./pages/UserManagement";
 import ProtectedRoute from "./components/ProtectedRoute";
 import CreateBlog from "./pages/CreateBlog";
+import MyPost from "./pages/MyPost";
 function App() {
     return (
         <BrowserRouter>
@@ -25,6 +26,14 @@ function App() {
                             element={
                                 <ProtectedRoute role="admin">
                                     <UserManagement />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="my-post"
+                            element={
+                                <ProtectedRoute role="user admin">
+                                    <MyPost />
                                 </ProtectedRoute>
                             }
                         />

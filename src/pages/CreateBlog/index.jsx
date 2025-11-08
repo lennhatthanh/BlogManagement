@@ -57,20 +57,18 @@ export default function CreateBlog() {
             }
         );
         const result = await res.json();
-        console.log("result", result);
-        console.log("res", res);
-        
+
         if (res.ok) {
             handleCreateBlog(result);
         } else {
-            toast.success("Tải hình không thành công")
-            setLoading(false)
+            toast.success("Tải hình không thành công");
+            setLoading(false);
         }
     };
     const handleCreateBlog = async (imageResult) => {
         try {
             await createBlog({
-                title,
+                title: title.trim(),
                 image: imageResult.url,
                 content: editorRef.current ? editorRef.current.getContent() : blog.content,
                 tags: tags.map((item) => item.name),
@@ -87,8 +85,9 @@ export default function CreateBlog() {
             navigate("/");
         } catch (error) {
             toast.error(error.response.data.message);
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
     };
     return (
         <div>
@@ -203,7 +202,10 @@ export default function CreateBlog() {
                         </div>
                         <div className="flex gap-2">
                             {tags.map((item) => (
-                                <Badge onClick={() => handleRemoveTag(item)} className="cursor-pointer bg-primary text-white">
+                                <Badge
+                                    onClick={() => handleRemoveTag(item)}
+                                    className="cursor-pointer bg-primary text-white"
+                                >
                                     {item.name}
                                     <span>
                                         <svg
