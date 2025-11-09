@@ -120,7 +120,7 @@ export default function MyPost() {
                     )}
                 </TableBody>
             </Table>
-            <DialogDeleteBlog open={open} setOpen={setOpen} blog={blog?.title} handleClick={handleDeleteBlog} />
+            <DialogDeleteBlog open={open} setOpen={setOpen} title={blog?.title} handleClick={handleDeleteBlog} />
         </div>
     );
 }
