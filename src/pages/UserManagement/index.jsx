@@ -48,6 +48,7 @@ export default function UserManagement() {
             }
         } catch (error) {
             toast.error(error?.response?.data?.message);
+            fetchMyPost()
         } finally {
             setUser(null);
         }

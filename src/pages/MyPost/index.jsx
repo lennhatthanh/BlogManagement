@@ -53,6 +53,7 @@ export default function MyPost() {
             }
         } catch (error) {
             toast.error(error?.response?.data?.message);
+            fetchMyPost();
         } finally {
             setBlog(null);
         }
@@ -79,7 +80,7 @@ export default function MyPost() {
                                 </div>
                             </TableCell>
                         </TableRow>
-                    ) : blogs.length === 0 ? (
+                    ) : blogs?.length === 0 ? (
                         <TableRow className="w-full">
                             <TableCell className="h-full" colspan={3}>
                                 <div className="min-h-[400px] w-full flex justify-center items-center">

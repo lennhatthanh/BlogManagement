@@ -3,12 +3,13 @@ import { Spinner } from "@/components/ui/spinner";
 import { getBlog } from "@/services/api/blog";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function BlogDetail() {
     const { id } = useParams();
     const [blog, setBlogs] = useState({});
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate()
     useEffect(() => {
         getBlogDetail();
     }, []);
@@ -19,6 +20,7 @@ export default function BlogDetail() {
             setBlogs(res.data);
         } catch (error) {
             toast.success(error?.response?.data?.message);
+            navigate("/")
         }
         setLoading(false);
     };
