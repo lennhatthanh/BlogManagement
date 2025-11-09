@@ -29,7 +29,7 @@ export function DropdownMenuClient() {
                     </svg>
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="start">
+            <DropdownMenuContent align="end">
                 <DropdownMenuItem>
                     <Link to="/login" className="flex gap-2 items-center">
                         <svg

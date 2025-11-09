@@ -29,7 +29,7 @@ export function DropdownMenuUser({ handleLogout }) {
                     </svg>
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="start">
+            <DropdownMenuContent align="end">
                 <DropdownMenuItem>
                     <Link to="/my-post" className="flex gap-2 items-center">
                         <svg
