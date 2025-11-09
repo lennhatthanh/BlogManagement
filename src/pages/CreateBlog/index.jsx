@@ -74,7 +74,7 @@ export default function CreateBlog() {
                 tags: tags.map((item) => item.name),
             });
             if (!file || !editorRef.current.getContent() || !title || tags.length === 0) {
-                toast.success("Nhập thiếu thông tin");
+                toast.error("Nhập thiếu thông tin");
                 return;
             }
             toast.success("Tải bài thành công!");
