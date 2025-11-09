@@ -29,7 +29,7 @@ api.interceptors.response.use(
         }
         if (error.response?.status === 401) {
             // Kiểm tra 401
-            localStorage.removeItem("token"); // Xóa token không hợp lệ
+            localStorage.removeItem("userInfo"); // Xóa token không hợp lệ
             window.location.href = "/login"; // Chuyển hướng đến đăng nhập
         }
         return Promise.reject(error); // Truyền lỗi khác

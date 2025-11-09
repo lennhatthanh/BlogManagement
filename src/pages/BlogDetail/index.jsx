@@ -19,7 +19,7 @@ export default function BlogDetail() {
             const res = await getBlog(id);
             setBlogs(res.data);
         } catch (error) {
-            toast.success(error?.response?.data?.message);
+            toast.error(error?.response?.data?.message);
             navigate("/")
         }
         setLoading(false);

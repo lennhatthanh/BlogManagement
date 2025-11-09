@@ -31,7 +31,7 @@ export function DropdownMenuClient() {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start">
                 <DropdownMenuItem>
-                    <Link to="/login" className="flex gap-2">
+                    <Link to="/login" className="flex gap-2 items-center">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"
@@ -54,7 +54,7 @@ export function DropdownMenuClient() {
                     </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                    <Link to="/signup" className="flex gap-2">
+                    <Link to="/signup" className="flex gap-2 items-center">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"

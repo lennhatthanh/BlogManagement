@@ -73,7 +73,7 @@ export default function CreateBlog() {
                 content: editorRef.current ? editorRef.current.getContent() : blog.content,
                 tags: tags.map((item) => item.name),
             });
-            if (!file || !editorRef.current.getContent() || !title) {
+            if (!file || !editorRef.current.getContent() || !title || tags.length === 0) {
                 toast.success("Nhập thiếu thông tin");
                 return;
             }
